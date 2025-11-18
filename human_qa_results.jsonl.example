@@ -1,0 +1,5 @@
+{"case_id": "syn_00001", "human_review": "accept", "human_notes": "Annotation is correct"}
+{"case_id": "syn_00002", "human_review": "accept", "human_label": 1, "human_notes": "Accepted but changed label from 2 to 1"}
+{"case_id": "syn_00003", "human_review": "reject", "human_notes": "Query is unrealistic"}
+{"case_id": "syn_00010", "human_review": "accept"}
+

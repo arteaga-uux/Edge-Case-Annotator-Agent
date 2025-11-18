@@ -1,0 +1,39 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+build/
+dist/
+*.egg-info/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Data files (keep these out of version control)
+*.jsonl
+*.json
+!requirements.txt
+
+# Keep example files
+!*.example
+
+# Embeddings and indexes
+*.index
+*.faiss
+embeddings/
+
+# Logs
+*.log
+
+# OS
+.DS_Store
+Thumbs.db
+

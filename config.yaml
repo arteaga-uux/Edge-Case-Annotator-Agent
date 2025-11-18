@@ -1,0 +1,147 @@
+# Edge-Case Annotator Agent - Configuration File
+# All tunable parameters in one place
+
+# =============================================================================
+# LLM Configuration
+# =============================================================================
+llm:
+  # Model names
+  embedding_model: "text-embedding-3-small"
+  generation_model: "gpt-4o-mini"
+  annotation_model: "gpt-4o-mini"
+  
+  # Temperature settings (0.0 = deterministic, 2.0 = very creative)
+  generation_temperature: 0.8  # Higher for diverse synthetic cases
+  annotation_temperature: 0.3  # Lower for consistent annotations
+  critique_temperature: 0.3    # Lower for focused criticism
+  judge_temperature: 0.2       # Lowest for stable judgments
+
+# =============================================================================
+# RAG (Retrieval-Augmented Generation) Parameters
+# =============================================================================
+rag:
+  # Phase 4: Synthetic case generation
+  generation:
+    top_k_guidelines: 3  # Number of guideline chunks to retrieve
+    top_k_examples: 5    # Number of good examples to retrieve
+  
+  # Phase 5: Three-LLM annotation system
+  annotation:
+    top_k_guidelines: 5   # More guidelines for careful annotation
+    top_k_examples: 5     # Similar good examples
+    top_k_resolved: 3     # Previously resolved synthetic cases (Stage 2)
+
+# =============================================================================
+# Chunking Configuration (3 types)
+# =============================================================================
+chunking:
+  # Guidelines chunking (Phase 2)
+  guidelines:
+    min_tokens: 300
+    max_tokens: 600
+    split_by: "sentence"  # Options: "sentence", "paragraph"
+  
+  # Annotation cases chunking (Phase 2)
+  annotations:
+    max_tokens: 500       # If annotation text is very long
+    include_metadata: true
+    truncate_if_exceeds: true
+  
+  # Resolved synthetics chunking (Phase 5)
+  resolved_synthetics:
+    max_tokens: 400
+    include_rationale: true
+    max_rationale_tokens: 200  # Truncate long rationales
+
+# =============================================================================
+# Pattern Discovery Configuration (Phase 3)
+# =============================================================================
+pattern_discovery:
+  # Budget allocation
+  total_synthetic_budget: 100  # Total number of synthetic cases to generate
+  target_quality: 0.95         # Target quality for hybrid dataset
+  min_pattern_volume: 3        # Minimum errors to form a pattern
+  
+  # DBSCAN clustering parameters
+  clustering:
+    eps: 0.3              # Maximum distance for clustering (0.0-1.0)
+    min_samples: 2        # Minimum samples per cluster
+  
+  # Budget allocation formula: score = quality_gap^power × log(base + volume)
+  budget_allocation:
+    quality_gap_power: 1.0
+    volume_log_base: 1.0
+
+# =============================================================================
+# Quality Assurance Configuration (Phase 6)
+# =============================================================================
+qa:
+  # Human review sampling rates
+  judge_accepted_sample_rate: 0.30  # 30% of judge_accepted cases
+  ambiguous_sample_rate: 1.0        # 100% of ambiguous cases (always review)
+
+# =============================================================================
+# File Paths Configuration
+# =============================================================================
+paths:
+  # Input files
+  input:
+    guidelines: "guidelines.md"
+    goldens: "goldens.jsonl"
+    annotations: "annotations.jsonl"
+    human_qa_results: "human_qa_results.jsonl"  # Optional
+  
+  # Intermediate outputs
+  intermediate:
+    prepared_guidelines: "prepared_guidelines.json"
+    tagged_annotations: "tagged_annotations.jsonl"
+    tagged_goldens: "tagged_goldens.jsonl"
+    crosschecked_annotations: "crosschecked_annotations.jsonl"
+    guideline_index: "guideline_index.jsonl"
+    example_index: "example_index.jsonl"
+    all_annotations_index: "all_annotations_index.jsonl"
+    edge_case_profiles: "edge_case_profiles.jsonl"
+    new_cases: "new_cases.jsonl"
+    synthetic_annotations: "synthetic_annotations.jsonl"
+    ambiguous_cases: "ambiguous_cases.jsonl"
+    resolved_synthetics_index: "resolved_synthetics_index.jsonl"
+  
+  # Final outputs
+  output:
+    human_set: "human_set.jsonl"
+    synthetic_set: "synthetic_set.jsonl"
+    hybrid_set: "hybrid_set.jsonl"
+    dataset_metrics: "dataset_metrics.json"
+  
+  # Logging
+  log_dir: "logs"
+  log_file: "edge_case_annotator.log"
+
+# =============================================================================
+# Logging Configuration
+# =============================================================================
+logging:
+  level: "INFO"  # Options: DEBUG, INFO, WARNING, ERROR, CRITICAL
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  console: true  # Log to console
+  file: true     # Log to file
+
+# =============================================================================
+# Tagging Heuristics (Phase 1)
+# =============================================================================
+tagging:
+  # Intent detection keywords
+  intent_signals:
+    navigational: ["download", "go to", "open", "show me", "find", "navigate"]
+    transactional: ["buy", "purchase", "order", "subscribe", "download"]
+    # If no signals, defaults to "informational"
+  
+  # Entity type detection keywords
+  entity_signals:
+    album: ["album", "lp", "ep", "disc"]
+    artist: ["artist", "band", "singer", "musician"]
+    song: ["song", "track", "single"]
+    playlist: ["playlist", "mix", "compilation"]
+    video: ["video", "mv", "music video"]
+    concert: ["concert", "live", "tour", "show", "en vivo"]
+
