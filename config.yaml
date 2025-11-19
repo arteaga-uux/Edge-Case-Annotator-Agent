@@ -86,10 +86,10 @@ qa:
 paths:
   # Input files
   input:
-    guidelines: "guidelines.md"
-    goldens: "goldens.jsonl"
-    annotations: "annotations.jsonl"
-    human_qa_results: "human_qa_results.jsonl"  # Optional
+    guidelines: "data/guidelines/guidelines.md"
+    goldens: "data/raw/goldens.jsonl"
+    annotations: "data/raw/annotations.jsonl"
+    human_qa_results: "human_qa_results.jsonl"  # Optional (root level if provided)
   
   # Intermediate outputs
   intermediate:

@@ -24,12 +24,12 @@ from pathlib import Path
 from typing import List, Dict, Optional, Literal
 from openai import OpenAI
 
-from config import get_config
-from models import (
+from edge_case_annotator.config import get_config
+from edge_case_annotator.models import (
     EdgeCaseProfile, SyntheticCase, OptimisticAnnotation,
     StrictCritique, NeutralJudgment, AnnotatedCase, ResolvedSynthetic
 )
-from utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
+from edge_case_annotator.utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
 
 
 # Setup logger and config

@@ -22,9 +22,9 @@ from pathlib import Path
 from typing import List, Dict, Tuple
 from collections import defaultdict
 
-from config import get_config
-from models import FinalAnnotation, DatasetMetrics, AllMetrics, HumanQAResult
-from utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
+from edge_case_annotator.config import get_config
+from edge_case_annotator.models import FinalAnnotation, DatasetMetrics, AllMetrics, HumanQAResult
+from edge_case_annotator.utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
 
 
 # Setup logger and config

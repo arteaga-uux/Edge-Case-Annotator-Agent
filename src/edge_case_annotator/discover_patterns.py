@@ -19,9 +19,9 @@ from collections import defaultdict
 from sklearn.cluster import DBSCAN
 from sklearn.metrics.pairwise import cosine_similarity
 
-from config import get_config
-from models import EdgeCaseProfile, PatternMetrics, SeedError, SeedGood, Tags
-from utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
+from edge_case_annotator.config import get_config
+from edge_case_annotator.models import EdgeCaseProfile, PatternMetrics, SeedError, SeedGood, Tags
+from edge_case_annotator.utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
 
 
 # Setup logger and config

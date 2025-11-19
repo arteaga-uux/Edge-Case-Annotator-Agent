@@ -15,9 +15,9 @@ import logging
 from pathlib import Path
 from typing import Dict, Tuple, List
 
-from config import get_config
-from models import Annotation
-from utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
+from edge_case_annotator.config import get_config
+from edge_case_annotator.models import Annotation
+from edge_case_annotator.utils import setup_logging, load_jsonl_raw, save_jsonl_raw, get_file_path, validate_input_files
 
 
 # Setup logger

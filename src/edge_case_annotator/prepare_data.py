@@ -20,9 +20,9 @@ import logging
 from pathlib import Path
 from typing import List, Dict
 
-from config import get_config
-from models import Guidelines, GuidelineSection, Annotation, Tags, Metadata
-from utils import setup_logging, save_jsonl_raw, get_file_path, validate_input_files
+from edge_case_annotator.config import get_config
+from edge_case_annotator.models import Guidelines, GuidelineSection, Annotation, Tags, Metadata
+from edge_case_annotator.utils import setup_logging, save_jsonl_raw, get_file_path, validate_input_files
 
 
 # Setup logger

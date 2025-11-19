@@ -12,45 +12,45 @@ import subprocess
 import argparse
 from pathlib import Path
 
-from config import load_config
-from utils import setup_logging
+from edge_case_annotator.config import load_config
+from edge_case_annotator.utils import setup_logging
 
 
 PHASES = [
     {
         "number": 1,
         "name": "Data Preparation",
-        "scripts": ["prepare_data.py", "golden_crosscheck.py"],
+        "scripts": ["src/edge_case_annotator/prepare_data.py", "src/edge_case_annotator/golden_crosscheck.py"],
         "description": "Parse guidelines and crosscheck annotations"
     },
     {
         "number": 2,
         "name": "Build Embedding Indexes",
-        "scripts": ["build_indexes.py"],
+        "scripts": ["src/edge_case_annotator/build_indexes.py"],
         "description": "Create guideline, example, and annotation indexes"
     },
     {
         "number": 3,
         "name": "Pattern Discovery",
-        "scripts": ["discover_patterns.py"],
+        "scripts": ["src/edge_case_annotator/discover_patterns.py"],
         "description": "Discover error patterns and allocate budget"
     },
     {
         "number": 4,
         "name": "Generate Synthetic Cases",
-        "scripts": ["generate_cases.py"],
+        "scripts": ["src/edge_case_annotator/generate_cases.py"],
         "description": "Generate new edge cases using LLM #1"
     },
     {
         "number": 5,
         "name": "Annotate with Debate",
-        "scripts": ["annotate_with_debate.py"],
+        "scripts": ["src/edge_case_annotator/annotate_with_debate.py"],
         "description": "Annotate using three-LLM adversarial system"
     },
     {
         "number": 6,
         "name": "Build Final Datasets",
-        "scripts": ["build_final_sets.py"],
+        "scripts": ["src/edge_case_annotator/build_final_sets.py"],
         "description": "Create HUMAN_SET, SYNTHETIC_SET, and HYBRID_SET"
     }
 ]

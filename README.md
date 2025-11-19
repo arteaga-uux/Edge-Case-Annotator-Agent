@@ -18,10 +18,15 @@ An intelligent system that identifies systematic human annotation errors, genera
 
 ### Prerequisites
 
-1. **Install dependencies:**
+1. **Install the package in development mode:**
 ```bash
-pip install -r requirements.txt
+pip install -e .
 ```
+
+This will:
+- Install all dependencies from `requirements.txt`
+- Make the `edge_case_annotator` package importable
+- Set up the `edge-case-annotator` command-line tool
 
 2. **Set OpenAI API key:**
 ```bash
@@ -36,10 +41,10 @@ export OPENAI_API_KEY='your-key-here'
    - Pattern discovery thresholds
    - QA sampling rates
 
-4. **Prepare input files** (examples provided):
-   - `guidelines.md` - Annotation guidelines
-   - `goldens.jsonl` - Golden annotations
-   - `annotations.jsonl` - Human annotations to evaluate
+4. **Prepare input files** in the `data/` directory:
+   - `data/guidelines/guidelines.md` - Annotation guidelines
+   - `data/raw/goldens.jsonl` - Golden annotations
+   - `data/raw/annotations.jsonl` - Human annotations to evaluate
 
 ### Complete Workflow
 
@@ -53,23 +58,31 @@ python run_all_phases.py
 
 ```bash
 # Phase 1: Data Preparation
-python prepare_data.py
-python golden_crosscheck.py
+python src/edge_case_annotator/prepare_data.py
+python src/edge_case_annotator/golden_crosscheck.py
 
 # Phase 2: Build Embedding Indexes
-python build_indexes.py
+python src/edge_case_annotator/build_indexes.py
 
 # Phase 3: Pattern Discovery
-python discover_patterns.py
+python src/edge_case_annotator/discover_patterns.py
 
 # Phase 4: Generate Synthetic Cases
-python generate_cases.py
+python src/edge_case_annotator/generate_cases.py
 
 # Phase 5: Annotate with Debate
-python annotate_with_debate.py
+python src/edge_case_annotator/annotate_with_debate.py
 
 # Phase 6: Build Final Datasets
-python build_final_sets.py
+python src/edge_case_annotator/build_final_sets.py
+```
+
+Or use the Python module syntax:
+
+```bash
+python -m edge_case_annotator.prepare_data
+python -m edge_case_annotator.golden_crosscheck
+# ... etc
 ```
 
 **Advanced usage:**
@@ -95,6 +108,46 @@ After Phase 5, review synthetic annotations and create `human_qa_results.jsonl`:
 ```
 
 Then re-run Phase 6 to incorporate human feedback.
+
+## Project Structure
+
+```
+.
+├── README.md                       # Project documentation
+├── ARCHITECTURE.md                 # Detailed system architecture with Mermaid diagrams
+├── requirements.txt                # Python dependencies
+├── setup.py                        # Package installation configuration
+├── config.yaml                     # Centralized configuration (all tunable parameters)
+├── run_all_phases.py              # Main entrypoint script
+│
+├── src/
+│   └── edge_case_annotator/       # Main Python package
+│       ├── __init__.py
+│       ├── config.py              # Configuration loading and validation
+│       ├── models.py              # Pydantic data models
+│       ├── utils.py               # Shared utilities (logging, file I/O)
+│       ├── prepare_data.py        # Phase 1: Parse and tag data
+│       ├── golden_crosscheck.py   # Phase 1: Crosscheck with goldens
+│       ├── build_indexes.py       # Phase 2: Build embedding indexes
+│       ├── discover_patterns.py   # Phase 3: Error pattern discovery
+│       ├── generate_cases.py      # Phase 4: Generate synthetic cases
+│       ├── annotate_with_debate.py # Phase 5: 3-LLM annotation system
+│       ├── build_final_sets.py    # Phase 6: Build final datasets
+│       └── generate_synthetic_dataset.py  # Standalone: Generate test data
+│
+├── data/
+│   ├── guidelines/
+│   │   ├── guidelines.md          # Annotation guidelines (Markdown)
+│   │   └── Guidelines_SR-Music V4.pdf  # PDF version (optional)
+│   ├── examples/
+│   │   └── human_qa_results.jsonl.example  # Example QA results
+│   └── raw/
+│       ├── goldens.jsonl          # Golden annotations
+│       └── annotations.jsonl      # Human annotations to evaluate
+│
+├── logs/                          # Generated: Log files
+└── *.jsonl, *.json               # Generated: Intermediate and final outputs
+```
 
 ## System Overview
 

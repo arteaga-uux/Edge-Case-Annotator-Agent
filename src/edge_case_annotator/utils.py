@@ -8,7 +8,7 @@ from pathlib import Path
 from typing import List, TypeVar, Generic
 from pydantic import BaseModel, ValidationError
 
-from config import get_config, Config
+from edge_case_annotator.config import get_config, Config
 
 
 T = TypeVar('T', bound=BaseModel)
