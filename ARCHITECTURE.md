@@ -19,8 +19,8 @@ graph TD
     F -.->|accumulates| I[(resolved_synthetics_index)]
     I -.->|RAG Stage 2| F
     
-    style H fill:#90EE90
-    style I fill:#FFD700
+    style H fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ---
@@ -93,9 +93,9 @@ graph TD
     F --> H[example_index.jsonl]
     F --> I[all_annotations_index.jsonl]
     
-    style G fill:#B0E0E6
-    style H fill:#B0E0E6
-    style I fill:#B0E0E6
+    style G fill:#B0E0E6,stroke:#333,stroke-width:2px,color:#000
+    style H fill:#B0E0E6,stroke:#333,stroke-width:2px,color:#000
+    style I fill:#B0E0E6,stroke:#333,stroke-width:2px,color:#000
 ```
 
 **Three Indexes Created:**
@@ -141,7 +141,7 @@ graph TD
     
     M --> N[edge_case_profiles.jsonl]
     
-    style N fill:#FFB6C1
+    style N fill:#FFB6C1,stroke:#333,stroke-width:2px,color:#000
 ```
 
 **Two-Level Clustering:**
@@ -184,7 +184,7 @@ graph TD
     
     K --> L[new_cases.jsonl]
     
-    style L fill:#98FB98
+    style L fill:#98FB98,stroke:#333,stroke-width:2px,color:#000
 ```
 
 **RAG Context for Generation:**
@@ -250,9 +250,9 @@ graph TD
     U --> V[(resolved_synthetics_index.jsonl)]
     V -.->|RAG Stage 2<br/>next iteration| E
     
-    style V fill:#FFD700
-    style S fill:#90EE90
-    style T fill:#FFA07A
+    style V fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style S fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
+    style T fill:#FFA07A,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ### RAG Stage 2 - Historical Context
@@ -269,9 +269,9 @@ graph LR
     
     E -->|90 new cases| F[(resolved_synthetics<br/>245 cases)]
     
-    style B fill:#FFD700
-    style D fill:#FFD700
-    style F fill:#FFD700
+    style B fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style F fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
 ```
 
 **Key: File persists and grows across runs!**
@@ -343,10 +343,10 @@ graph TD
     J --> N[hybrid_set.jsonl]
     K --> O[dataset_metrics.json]
     
-    style L fill:#90EE90
-    style M fill:#87CEEB
-    style N fill:#FFD700
-    style O fill:#DDA0DD
+    style L fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
+    style M fill:#87CEEB,stroke:#333,stroke-width:2px,color:#000
+    style N fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
+    style O fill:#DDA0DD,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ### QA Flow
@@ -401,8 +401,8 @@ graph TD
     
     M --> N[LLM Prompts]
     
-    style C fill:#B0E0E6
-    style D fill:#FFD700
+    style C fill:#B0E0E6,stroke:#333,stroke-width:2px,color:#000
+    style D fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
 ```
 
 **Why Two Stages?**
@@ -424,8 +424,8 @@ graph LR
     E -.->|accumulates| G[(Historical<br/>Synthetics)]
     G -.->|informs| E
     
-    style F fill:#90EE90
-    style G fill:#FFD700
+    style F fill:#90EE90,stroke:#333,stroke-width:2px,color:#000
+    style G fill:#FFD700,stroke:#333,stroke-width:2px,color:#000
 ```
 
 ### File Sizes (typical)
